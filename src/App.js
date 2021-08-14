@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Logout from './pages/Logout'
 import Home from './pages/Home'
+import Profile from './pages/Profile'
 import Nav from './components/Nav'
 import {BrowserRouter, Route} from 'react-router-dom'
 import {useEffect} from 'react'
@@ -27,6 +28,7 @@ function App() {
             <Route path='/register' component={Register}/>
             <Route path='/logout' component={Logout}/>
             <Route path='/profile' component={Profile}/>
+            <Route path='/tickets/buy' component={BuyTickets}/>
         </BrowserRouter>
     </div>
   );

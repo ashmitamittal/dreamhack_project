@@ -6,7 +6,9 @@ const Nav = () => {
           <a href="/">Home</a> |
           <a href="/login">Login</a> |
           <a href="/register">Register</a> |
-          <a href="/logout">Logout</a>
+          <a href="/logout">Logout</a> |
+          {localStorage.getItem('user') ?
+          <a href="/profile">Profile</a> : null}
         </nav>
     )
 }
