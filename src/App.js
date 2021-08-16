@@ -5,20 +5,13 @@ import Register from './pages/Register'
 import Logout from './pages/Logout'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
+import BuyTickets from './pages/BuyTickets'
 import Nav from './components/Nav'
 import {BrowserRouter, Route} from 'react-router-dom'
 import {useEffect} from 'react'
 
 function App() {
-//
-//        useEffect(() => {
-//       (
-//            async () => {
-//
-//            }
-//       )()
-//
-//    })
+
   return (
     <div className="App">
         <Nav />
