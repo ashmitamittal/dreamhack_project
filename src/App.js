@@ -9,6 +9,7 @@ import BuyTickets from './pages/BuyTickets'
 import Nav from './components/Nav'
 import {BrowserRouter, Route} from 'react-router-dom'
 import {useEffect} from 'react'
+import GameInfo from './pages/GameInfo'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path='/logout' component={Logout}/>
             <Route path='/profile' component={Profile}/>
             <Route path='/tickets/buy' component={BuyTickets}/>
+            <Route path='/game/:name' component={GameInfo}/>
         </BrowserRouter>
     </div>
   );

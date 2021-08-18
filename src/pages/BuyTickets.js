@@ -44,6 +44,7 @@ const BuyTickets = () => {
             }
           )
     }, [])
+       console.log(tickets)
 
      if (error) {
         return <div>Error: {error.message}</div>;
