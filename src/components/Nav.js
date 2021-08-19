@@ -8,7 +8,9 @@ const Nav = () => {
           <a href="/register">Register</a> |
           <a href="/logout">Logout</a> |
           {localStorage.getItem('user') ?
-          <a href="/profile">Profile</a> : null}
+          <span> <a href="/profile">Profile</a> | <a href="/tournaments">Tournaments</a> </span>
+          : null} |
+          <a href="/tickets/buy">Buy Tickets</a>
         </nav>
     )
 }

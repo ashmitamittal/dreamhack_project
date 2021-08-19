@@ -10,6 +10,7 @@ import Nav from './components/Nav'
 import {BrowserRouter, Route} from 'react-router-dom'
 import {useEffect} from 'react'
 import GameInfo from './pages/GameInfo'
+import MyTickets from './pages/MyTickets'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Route path='/profile' component={Profile}/>
             <Route path='/tickets/buy' component={BuyTickets}/>
             <Route path='/game/:name' component={GameInfo}/>
+            <Route path='/tournaments' component={MyTickets}/>
         </BrowserRouter>
     </div>
   );

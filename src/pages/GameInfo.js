@@ -5,35 +5,33 @@ function GameInfo () {
    const {name} = useParams()
    let user = JSON.parse(localStorage.getItem('user'));
    let button_info = 'Participate'
+   const [clicked, setClicked] = useState(false);
+   const [event, setEvent] = useState()
 
    const Submit = async (game_name, schedule_id) => {
-    if (user) {
-        console.log(game_name)
-        console.log(schedule_id)
-        let email = user['email']
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-            game_name,
-            schedule_id,
-            email
-        })
-        };
-        const response = await fetch('http://localhost:5000/entries', requestOptions);
-        const data = await response.json();
-        console.log(data)
-        if (data['error']) {
-         console.log(data['message'])
+        setClicked(true)
+        setEvent(schedule_id)
+        if (localStorage.getItem('user')) {
+            let email = user['email']
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                game_name,
+                schedule_id,
+                email
+            })
+            };
+            const response = await fetch('http://localhost:5000/entries', requestOptions);
+            const data = await response.json();
+            if (data['error']) {
+             console.log(data['message'])
+            } else {
+             localStorage.setItem('user', JSON.stringify(data['user']))
+            }
         } else {
-         localStorage.setItem('user', JSON.stringify(data['user']))
-         button_info = 'Joined'
+        console.log('Please Log In')
         }
-    } else {
-    console.log('Please Log In')
-    }
-
-
     }
 
 
@@ -62,8 +60,6 @@ function GameInfo () {
           )
    }, [])
 
-   console.log(schedule)
-
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -81,7 +77,9 @@ function GameInfo () {
                     <ul>
                         <li>Limit: {tournament.limit}</li>
                         <li>Available Seats: {tournament.limit - tournament.registered}</li>
-                        <li><button type='submit' onClick={() => Submit(name, tournament.id)}>{button_info}</button></li>
+                        {clicked ?
+                        <li><button className='disabled'>{tournament.id === event ? 'Joined' : 'Participate'}</button></li> :
+                        <li><button onClick={() => Submit(name, tournament.id)}>Participate</button></li> }
                     </ul>
                   </div>
                 </div>
