@@ -5,7 +5,8 @@ const Logout = () => {
 
     localStorage.removeItem('user')
     localStorage.removeItem('token')
-    return <Redirect to='/'/>
+
+    return <Redirect to='/login'/>
 
 }
 

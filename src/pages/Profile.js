@@ -43,11 +43,11 @@ const Profile = () => {
             <table>
           <tr>
             <td>Name</td>
-            <td><input placeholder={user['name']} onChange={e => setName(e.target.value)}/></td>
+            <td><input value={name} onChange={e => setName(e.target.value)}/></td>
           </tr>
           <tr>
             <td>Surname</td>
-            <td><input onChange={e => setLastName(e.target.value)} placeholder={user['lastname']} /></td>
+            <td><input onChange={e => setLastName(e.target.value)} value={lastname} /></td>
           </tr>
           <tr>
             <td>Email</td>
@@ -55,11 +55,11 @@ const Profile = () => {
           </tr>
           <tr>
             <td>IGN</td>
-            <td><input onChange={e => setIgn(e.target.value)} placeholder={user['ign']} /></td>
+            <td><input onChange={e => setIgn(e.target.value)} value={ign} /></td>
           </tr>
           <tr>
             <td>Discord Account</td>
-            <td><input onChange={e => setDiscord(e.target.value)} placeholder={user['discord']} /></td>
+            <td><input onChange={e => setDiscord(e.target.value)} value={discord} /></td>
           </tr>
         </table>
             <button type='submit'>Submit</button>

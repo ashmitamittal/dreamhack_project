@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import {Redirect} from 'react-router-dom'
+import {Table, Container} from 'react-bootstrap'
 
-const MyTickets = () => {
+
+const AdminTokens = () => {
    const [error, setError] = useState(null);
    const [isLoaded, setIsLoaded] = useState(false);
    const [schedule, setSchedule] = useState([]);
    let user = JSON.parse(localStorage.getItem('user'));
    let email = user['email']
    useEffect(() => {
-        fetch("http://localhost:5000/tickets", {
+        fetch("http://localhost:5000/admin/api/tokens", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -35,25 +37,35 @@ console.log(schedule)
     } else {
         return (
         <div>
-        My Tournaments
-        {schedule.map(tournament => (
-          <li key={tournament.id}>
-            <div>
-              <div class="container">
-                <h4>{tournament.name}</h4>
-                <ul>
-                    <li>{tournament.date}  {tournament.time}</li>
-                    <li>Lobby Id: {tournament.lobby_id}</li>
-                    <li>Lobby Password: {tournament.lobby_pass}</li>
-                </ul>
-              </div>
-            </div>
-          </li>
-        ))}
+        Tokens
+        <Container>
+        <Table bordered hover size="sm">
+              <thead variant="dark">
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Tokens</th>
+                  <th>Price (Rs.)</th>
+                  <th>Added On</th>
+                </tr>
+                </thead>
+            {schedule.map(ticket => (
+              <tbody >
+                <tr key={ticket.id}>
+                  <td>{ticket.id}</td>
+                  <td>{ticket.name}</td>
+                  <td>{ticket.number}</td>
+                  <td>{ticket.price}.00</td>
+                  <td>{ticket.added}</td>
+                </tr>
+              </tbody>
+            ))}
+            </Table>
+            </Container>
         </div>
         );
     }
 }
 
-export default MyTickets
+export default AdminTokens
 

@@ -1,18 +1,20 @@
 import React, {SyntheticEvent, useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, Redirect} from 'react-router-dom'
+import Modals from '../components/Modal'
 
 function GameInfo () {
    const {name} = useParams()
    let user = JSON.parse(localStorage.getItem('user'));
+   let email = user['email']
    let button_info = 'Participate'
-   const [clicked, setClicked] = useState(false);
+   const [clicked, setClicked] = useState('Participate');
    const [event, setEvent] = useState()
+   const [modal, setModal] = useState(false)
+   const [redirect, setRedirect] = useState(false)
 
    const Submit = async (game_name, schedule_id) => {
-        setClicked(true)
         setEvent(schedule_id)
         if (localStorage.getItem('user')) {
-            let email = user['email']
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -20,15 +22,19 @@ function GameInfo () {
                 game_name,
                 schedule_id,
                 email
-            })
-            };
+            })};
             const response = await fetch('http://localhost:5000/entries', requestOptions);
             const data = await response.json();
             if (data['error']) {
              console.log(data['message'])
-            } else {
+            } else if (data['ign']) {
+                setModal(true)
+            } else if (data['registered'] == false) {
              localStorage.setItem('user', JSON.stringify(data['user']))
             }
+            console.log(data['message'])
+            setClicked('Joined')
+            setRedirect(true)
         } else {
         console.log('Please Log In')
         }
@@ -44,7 +50,8 @@ function GameInfo () {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                name
+                name,
+                email
             })
         })
           .then(res => res.json())
@@ -60,6 +67,10 @@ function GameInfo () {
           )
    }, [])
 
+   if(redirect) {
+        return <Redirect to='/tournaments'/>
+    }
+
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -69,22 +80,9 @@ function GameInfo () {
         <div>
         Game Info
         <h2>{name}</h2>
-        {schedule.map(tournament => (
-              <li key={tournament.id}>
-                <div>
-                  <div class="container">
-                    <h4>{tournament.date}  {tournament.time}</h4>
-                    <ul>
-                        <li>Limit: {tournament.limit}</li>
-                        <li>Available Seats: {tournament.limit - tournament.registered}</li>
-                        {clicked ?
-                        <li><button className='disabled'>{tournament.id === event ? 'Joined' : 'Participate'}</button></li> :
-                        <li><button onClick={() => Submit(name, tournament.id)}>Participate</button></li> }
-                    </ul>
-                  </div>
-                </div>
-              </li>
-            ))}
+        {console.log(schedule)}
+
+            { modal ? <Modals schedule_id={event} /> : null}
         </div>
         );
     }

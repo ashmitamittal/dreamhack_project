@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 
 const Home = () => {
-
     let user = JSON.parse(localStorage.getItem('user'));
     let email = ''
     let name = ''
