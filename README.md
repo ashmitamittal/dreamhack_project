@@ -19,4 +19,4 @@ You will also see any lint errors in the console.
 
 <img width="600" alt="fronthome" src="https://user-images.githubusercontent.com/83453304/149686413-479d4844-32bb-4fea-8368-52286aa1e966.png">
 <img width="600" alt="tickets" src="https://user-images.githubusercontent.com/83453304/149686421-69719467-fedf-4986-b6ea-6214459660cd.png">
-![seats](https://user-images.githubusercontent.com/83453304/149686527-27ee053e-01c0-43a4-a063-a6a770051372.png)
+<img width="600" alt="tickets" src="https://user-images.githubusercontent.com/83453304/149686527-27ee053e-01c0-43a4-a063-a6a770051372.png">
